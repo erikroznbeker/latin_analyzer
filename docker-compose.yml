@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # Interactive CLI mode (default)
+  latin-analyzer:
+    build: .
+    image: latin-analyzer:latest
+    container_name: latin-analyzer-cli
+    stdin_open: true
+    tty: true
+    volumes:
+      # Persist CLTK models between runs
+      - cltk-data:/root/cltk_data
+      - stanza-data:/root/stanza_resources
+    command: python latin_analyzer_cli.py
+
+  # Demo mode - runs demo and exits
+  demo:
+    build: .
+    image: latin-analyzer:latest
+    container_name: latin-analyzer-demo
+    volumes:
+      - cltk-data:/root/cltk_data
+      - stanza-data:/root/stanza_resources
+    command: python latin_analyzer.py
+    profiles:
+      - demo
+
+  # Setup mode - downloads models only
+  setup:
+    build: .
+    image: latin-analyzer:latest
+    container_name: latin-analyzer-setup
+    volumes:
+      - cltk-data:/root/cltk_data
+      - stanza-data:/root/stanza_resources
+    command: python setup_models.py
+    profiles:
+      - setup
+
+volumes:
+  cltk-data:
+    name: latin-analyzer-cltk-data
+  stanza-data:
+    name: latin-analyzer-stanza-data

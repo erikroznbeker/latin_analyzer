@@ -28,7 +28,46 @@ perennius – A (akuzativ) sg (jednina) n (srednji rod) aktiv od perennio (glago
 
 ## Instalacija
 
-### Zahtjevi
+### 🐳 Opcija 1: Docker (preporučeno)
+
+**Najlakši način - radi na svim platformama (Windows, Mac, Linux) bez brige o verziji Pythona!**
+
+#### Zahtjevi:
+- [Docker](https://www.docker.com/get-started) i Docker Compose
+
+#### Korištenje:
+
+```bash
+# Interaktivni CLI mode (preporučeno)
+docker-compose up
+
+# Demo mode (pokreće primjer i izlazi)
+docker-compose --profile demo up demo
+
+# Samo preuzimanje modela
+docker-compose --profile setup up setup
+```
+
+**Napomena:** Modeli (~250MB) će biti preuzeti pri prvom pokretanju i spremljeni u Docker volume za buduću upotrebu.
+
+**Alternativno - direktno Docker komande:**
+
+```bash
+# Build image
+docker build -t latin-analyzer .
+
+# Interaktivni CLI
+docker run -it latin-analyzer
+
+# Demo mode
+docker run latin-analyzer python latin_analyzer.py
+```
+
+---
+
+### 💻 Opcija 2: Lokalna instalacija
+
+#### Zahtjevi
 
 - **Python 3.13+** (CLTK 2.x zahtijeva Python 3.13 ili noviji)
 - **CLTK 2.x** (aplikacija koristi najnoviju verziju CLTK-a)
@@ -113,7 +152,19 @@ python latin_analyzer.py
 
 ## Korištenje
 
-### 1. Interaktivni CLI (preporučeno)
+### 🐳 Docker način
+
+```bash
+# Interaktivni CLI
+docker-compose up
+
+# Demo
+docker-compose --profile demo up demo
+```
+
+### 💻 Lokalni način
+
+#### 1. Interaktivni CLI (preporučeno)
 
 ```bash
 python3 latin_analyzer_cli.py
@@ -124,7 +175,7 @@ Ovo pokreće interaktivno sučelje gdje možeš:
 - Koristiti više linija teksta
 - Analizirati više puta bez ponovnog pokretanja
 
-### 2. Demo primjer
+#### 2. Demo primjer
 
 ```bash
 python3 latin_analyzer.py
