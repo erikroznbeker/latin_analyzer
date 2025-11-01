@@ -21,7 +21,7 @@ def print_help():
     """Print usage help."""
     print("\nUpute:")
     print("  - Unesi latinski tekst (možeš koristiti više linija)")
-    print("  - Pritisni prazan Enter (bez teksta) za analizu")
+    print("  - Upiši 'done' ili pritisni prazan Enter za analizu")
     print("  - Upiši 'q' ili 'quit' za izlaz")
     print("  - Upiši 'help' za ove upute")
     print()
@@ -29,33 +29,43 @@ def print_help():
 
 def get_multiline_input():
     """Get multiline input from user."""
-    print("Unesi latinski tekst (prazan Enter za analizu, 'q' za izlaz):")
+    print("Unesi latinski tekst. Kad završiš, upiši 'done' ili pritisni Enter na praznoj liniji.")
     print("-" * 70)
 
     lines = []
 
     while True:
         try:
-            line = input()
+            line = input("> " if not lines else "  ")
 
             # Check for quit commands
             if line.strip().lower() in ['q', 'quit', 'exit']:
                 return None
 
+            # Check for done command
+            if line.strip().lower() == 'done':
+                if lines:
+                    break
+                else:
+                    print("(Unesi neki tekst prvo)")
+                    continue
+
             # Check for help
             if line.strip().lower() == 'help':
                 print_help()
-                return get_multiline_input()
-
-            # Empty line - stop and analyze
-            if not line.strip():
-                # If we already have some lines, stop
-                if lines:
-                    break
-                # Otherwise, ignore the empty line and continue
                 continue
-            else:
-                lines.append(line)
+
+            # Empty line - if we have text, analyze; otherwise continue
+            if not line.strip():
+                if lines:
+                    # We have text, proceed to analysis
+                    break
+                else:
+                    # No text yet, just continue
+                    continue
+
+            # Non-empty line - add to our text
+            lines.append(line)
 
         except EOFError:
             break
