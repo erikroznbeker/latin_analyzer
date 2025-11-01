@@ -37,6 +37,24 @@ perennius – A (akuzativ) sg (jednina) n (srednji rod) aktiv od perennio (glago
 
 ### 1. Instaliraj Python dependencies
 
+**Preporučeno: Koristi virtual environment**
+
+```bash
+# Kreiraj virtual environment sa Python 3.13+
+python3.13 -m venv venv
+
+# Aktiviraj virtual environment
+# Na Linux/Mac:
+source venv/bin/activate
+# Na Windows:
+venv\Scripts\activate
+
+# Instaliraj dependencies
+pip install -r requirements.txt
+```
+
+**Alternativno: Direktna instalacija**
+
 ```bash
 pip install cltk[stanza]
 ```
@@ -200,6 +218,7 @@ latin/
 - Lemmatizacija i morfološka analiza imaju točnost preko 90%
 - CLTK koristi Universal Dependencies standard za morfološke značajke
 - Aplikacija trenutno ne pruža prijevode riječi, samo morfološku analizu
+- **Warning-i o `InflClass`**: CLTK 2.x može prikazivati warning-e o InflClass validaciji (npr. "Invalid value 'LatX' for feature key 'InflClass'"). Ovo je poznati issue u kompatibilnosti CLTK 2.x/Stanza i **ne utječe na funkcionalnost** aplikacije.
 
 ## Potencijalna poboljšanja
 
