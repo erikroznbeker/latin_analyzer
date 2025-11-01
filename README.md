@@ -39,13 +39,13 @@ perennius – A (akuzativ) sg (jednina) n (srednji rod) aktiv od perennio (glago
 
 ```bash
 # Interaktivni CLI mode (preporučeno)
-docker-compose up
+docker-compose run --rm latin-analyzer
 
 # Demo mode (pokreće primjer i izlazi)
-docker-compose --profile demo up demo
+docker-compose run --rm demo
 
 # Samo preuzimanje modela
-docker-compose --profile setup up setup
+docker-compose run --rm setup
 ```
 
 **Napomena:** Modeli (~250MB) će biti preuzeti pri prvom pokretanju i spremljeni u Docker volume za buduću upotrebu.
@@ -156,10 +156,10 @@ python latin_analyzer.py
 
 ```bash
 # Interaktivni CLI
-docker-compose up
+docker-compose run --rm latin-analyzer
 
 # Demo
-docker-compose --profile demo up demo
+docker-compose run --rm demo
 ```
 
 ### 💻 Lokalni način

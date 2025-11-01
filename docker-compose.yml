@@ -1,11 +1,10 @@
 version: '3.8'
 
 services:
-  # Interactive CLI mode (default)
+  # Interactive CLI mode (use: docker-compose run --rm latin-analyzer)
   latin-analyzer:
     build: .
     image: latin-analyzer:latest
-    container_name: latin-analyzer-cli
     stdin_open: true
     tty: true
     volumes:
@@ -18,25 +17,19 @@ services:
   demo:
     build: .
     image: latin-analyzer:latest
-    container_name: latin-analyzer-demo
     volumes:
       - cltk-data:/root/cltk_data
       - stanza-data:/root/stanza_resources
     command: python latin_analyzer.py
-    profiles:
-      - demo
 
   # Setup mode - downloads models only
   setup:
     build: .
     image: latin-analyzer:latest
-    container_name: latin-analyzer-setup
     volumes:
       - cltk-data:/root/cltk_data
       - stanza-data:/root/stanza_resources
     command: python setup_models.py
-    profiles:
-      - setup
 
 volumes:
   cltk-data:
