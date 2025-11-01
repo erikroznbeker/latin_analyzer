@@ -30,10 +30,10 @@ perennius – A (akuzativ) sg (jednina) n (srednji rod) aktiv od perennio (glago
 
 ### Zahtjevi
 
-- **Python 3.8 - 3.12** (preporučeno 3.10 ili 3.11)
-- **CLTK 1.x** (aplikacija je pisana za CLTK 1.5.0)
+- **Python 3.13+** (CLTK 2.x zahtijeva Python 3.13 ili noviji)
+- **CLTK 2.x** (aplikacija koristi najnoviju verziju CLTK-a)
 
-**Napomena:** CLTK 2.x ima breaking changes. Ova aplikacija trenutno podržava CLTK 1.x.
+**Napomena:** Aplikacija je nadograđena na CLTK 2.x koji koristi moderniji API i zahtijeva Python 3.13+.
 
 ### 1. Instaliraj Python dependencies
 
@@ -190,9 +190,9 @@ latin/
 
 ## Tehnologije
 
-- **CLTK** - Classical Language Toolkit za NLP procesiranje klasičnih jezika
+- **CLTK 2.x** - Classical Language Toolkit za NLP procesiranje klasičnih jezika
 - **Stanza** - Stanford NLP biblioteka za morfološku analizu
-- **Python 3.8+**
+- **Python 3.13+**
 
 ## Napomene
 

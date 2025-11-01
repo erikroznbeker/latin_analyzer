@@ -25,20 +25,22 @@ echo [OK] Python is installed:
 python --version
 echo.
 
-REM Check Python version (need 3.8-3.12 for CLTK 1.x)
+REM Check Python version (need 3.13+ for CLTK 2.x)
 echo Checking Python version compatibility...
-python -c "import sys; v=sys.version_info; exit(0 if (3,8) <= (v.major,v.minor) < (3,13) else 1)"
+python -c "import sys; v=sys.version_info; exit(0 if (v.major,v.minor) >= (3,13) else 1)"
 if errorlevel 1 (
     echo.
-    echo [WARNING] This application requires Python 3.8 - 3.12
-    echo You appear to have a different version.
-    echo CLTK 1.x may not work correctly with Python 3.13+
+    echo [ERROR] This application requires Python 3.13 or higher
+    echo You appear to have an older version.
+    echo CLTK 2.x requires Python 3.13+
     echo.
-    echo Please install Python 3.11 or 3.12 for best compatibility.
+    echo Please install Python 3.13 or newer for compatibility.
     echo Download from: https://www.python.org/downloads/
     echo.
     pause
+    exit /b 1
 )
+echo [OK] Python version is compatible (3.13+)
 echo.
 
 REM Upgrade pip
@@ -53,7 +55,7 @@ echo.
 
 REM Install requirements
 echo ============================================================
-echo Step 2: Installing dependencies (cltk)...
+echo Step 2: Installing dependencies (CLTK 2.x with Stanza)...
 echo ============================================================
 python -m pip install -r requirements.txt
 if errorlevel 1 (

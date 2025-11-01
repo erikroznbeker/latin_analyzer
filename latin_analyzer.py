@@ -1,14 +1,10 @@
 """
-Latin Language Analyzer using CLTK
+Latin Language Analyzer using CLTK 2.x
 Analyzes Latin text and provides morphological analysis, lemmatization, and POS tagging.
 """
 
-from cltk import NLP
-from cltk.core.data_types import Doc, Word, Pipeline
-from cltk.tokenizers.processes import LatinTokenizationProcess
-from cltk.lemmatize.processes import LatinLemmatizationProcess
-from cltk.dependency.processes import LatinStanzaProcess
-from cltk.languages.utils import get_lang
+from cltk.nlp import NLP
+from cltk.core.data_types import Doc, Word
 from typing import List, Dict
 
 
@@ -116,23 +112,14 @@ class LatinAnalyzer:
     }
 
     def __init__(self):
-        """Initialize the Latin NLP pipeline with custom processes (no embeddings)."""
-        print("Initializing CLTK Latin NLP pipeline...")
+        """Initialize the Latin NLP pipeline using CLTK 2.x with Stanza backend."""
+        print("Initializing CLTK 2.x Latin NLP pipeline...")
         print("Note: First run will download required models (~200MB)")
 
-        # Create custom pipeline without embeddings
-        latin_pipeline = Pipeline(
-            description="Custom Latin pipeline without embeddings",
-            processes=[
-                LatinTokenizationProcess,
-                LatinLemmatizationProcess,
-                LatinStanzaProcess,
-            ],
-            language=get_lang("lat")
-        )
-
-        self.nlp = NLP(language="lat", custom_pipeline=latin_pipeline, suppress_banner=True)
-        print("CLTK initialized successfully!")
+        # Initialize NLP with Stanza backend (CLTK 2.x API)
+        # "lati1261" is the Glottolog code for Latin
+        self.nlp = NLP("lati1261", backend="stanza", suppress_banner=True)
+        print("CLTK 2.x initialized successfully!")
 
     def analyze_text(self, text: str) -> Doc:
         """

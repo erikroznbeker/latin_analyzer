@@ -2,47 +2,31 @@
 Setup script to download required CLTK and Stanza models for Latin.
 Run this before using the Latin analyzer.
 
-CLTK 1.x compatible version - uses same initialization as latin_analyzer.py
+CLTK 2.x compatible version - uses same initialization as latin_analyzer.py
 """
 
 def setup_models():
     """Download required models for Latin analysis."""
 
-    print("Setting up Latin language models for CLTK 1.x...")
+    print("Setting up Latin language models for CLTK 2.x...")
     print("This will download approximately 250MB of data.")
     print()
 
     try:
-        print("Initializing CLTK NLP pipeline for Latin...")
+        print("Initializing CLTK 2.x NLP pipeline for Latin...")
         print("Models will be downloaded automatically on first use.")
         print()
 
-        # Import CLTK components (same as latin_analyzer.py)
-        from cltk import NLP
-        from cltk.core.data_types import Pipeline
-        from cltk.tokenizers.processes import LatinTokenizationProcess
-        from cltk.lemmatize.processes import LatinLemmatizationProcess
-        from cltk.dependency.processes import LatinStanzaProcess
-        from cltk.languages.utils import get_lang
-
-        # Create custom pipeline (same as latin_analyzer.py)
-        print("Creating custom Latin pipeline...")
-        latin_pipeline = Pipeline(
-            description="Custom Latin pipeline without embeddings",
-            processes=[
-                LatinTokenizationProcess,
-                LatinLemmatizationProcess,
-                LatinStanzaProcess,
-            ],
-            language=get_lang("lat")
-        )
+        # Import CLTK 2.x NLP (same as latin_analyzer.py)
+        from cltk.nlp import NLP
 
         # Initialize NLP - this will trigger model downloads
         # User will be prompted to confirm download
         print("Note: You will be asked to confirm the download (type 'Y' or press Enter).")
         print()
 
-        nlp = NLP(language="lat", custom_pipeline=latin_pipeline, suppress_banner=True)
+        # Initialize with CLTK 2.x API using Stanza backend
+        nlp = NLP("lati1261", backend="stanza", suppress_banner=True)
 
         # Test with a simple sentence to ensure everything works
         print("Testing analysis with sample sentence...")
