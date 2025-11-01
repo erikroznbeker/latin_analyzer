@@ -28,6 +28,13 @@ perennius – A (akuzativ) sg (jednina) n (srednji rod) aktiv od perennio (glago
 
 ## Instalacija
 
+### Zahtjevi
+
+- **Python 3.8 - 3.12** (preporučeno 3.10 ili 3.11)
+- **CLTK 1.x** (aplikacija je pisana za CLTK 1.5.0)
+
+**Napomena:** CLTK 2.x ima breaking changes. Ova aplikacija trenutno podržava CLTK 1.x.
+
 ### 1. Instaliraj Python dependencies
 
 ```bash
