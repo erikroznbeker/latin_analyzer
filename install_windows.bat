@@ -25,6 +25,22 @@ echo [OK] Python is installed:
 python --version
 echo.
 
+REM Check Python version (need 3.8-3.12 for CLTK 1.x)
+echo Checking Python version compatibility...
+python -c "import sys; v=sys.version_info; exit(0 if (3,8) <= (v.major,v.minor) < (3,13) else 1)"
+if errorlevel 1 (
+    echo.
+    echo [WARNING] This application requires Python 3.8 - 3.12
+    echo You appear to have a different version.
+    echo CLTK 1.x may not work correctly with Python 3.13+
+    echo.
+    echo Please install Python 3.11 or 3.12 for best compatibility.
+    echo Download from: https://www.python.org/downloads/
+    echo.
+    pause
+)
+echo.
+
 REM Upgrade pip
 echo ============================================================
 echo Step 1: Upgrading pip...
