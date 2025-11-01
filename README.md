@@ -51,13 +51,28 @@ python3 setup_models.py
 
 ### Windows korisnici
 
-Na Windows-u koristi Python skriptu umjesto bash skripte:
+**Automatska instalacija (preporučeno):**
+
+Jednostavno pokreni batch skriptu koja će instalirati sve automatski:
+
+```bash
+install_windows.bat
+```
+
+Ova skripta će:
+1. Provjeriti da li je Python instaliran
+2. Instalirati dependencies (cltk)
+3. Preuzeti potrebne modele (~250MB)
+
+**Ručna instalacija:**
+
+Alternativno, možeš ručno instalirati:
 
 ```bash
 # Instalacija dependencies
 pip install cltk
 
-# Preuzimanje modela (umjesto download_models.sh)
+# Preuzimanje modela
 python setup_models.py
 ```
 
