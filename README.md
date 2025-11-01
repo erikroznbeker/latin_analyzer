@@ -49,6 +49,26 @@ Alternativno, možeš ručno preuzeti modele:
 python3 setup_models.py
 ```
 
+### Windows korisnici
+
+Na Windows-u koristi Python skriptu umjesto bash skripte:
+
+```bash
+# Instalacija dependencies
+pip install cltk
+
+# Preuzimanje modela (umjesto download_models.sh)
+python setup_models.py
+```
+
+**Napomena:** Na Windows-u koristi `python` umjesto `python3` u svim komandama:
+```bash
+# Primjeri:
+python setup_models.py
+python latin_analyzer_cli.py
+python latin_analyzer.py
+```
+
 ## Korištenje
 
 ### 1. Interaktivni CLI (preporučeno)
