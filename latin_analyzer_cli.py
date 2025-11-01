@@ -21,7 +21,7 @@ def print_help():
     """Print usage help."""
     print("\nUpute:")
     print("  - Unesi latinski tekst (možeš koristiti više linija)")
-    print("  - Pritisni Enter dvaput za analizu")
+    print("  - Pritisni prazan Enter (bez teksta) za analizu")
     print("  - Upiši 'q' ili 'quit' za izlaz")
     print("  - Upiši 'help' za ove upute")
     print()
@@ -29,11 +29,10 @@ def print_help():
 
 def get_multiline_input():
     """Get multiline input from user."""
-    print("Unesi latinski tekst (Enter dvaput za analizu, 'q' za izlaz):")
+    print("Unesi latinski tekst (prazan Enter za analizu, 'q' za izlaz):")
     print("-" * 70)
 
     lines = []
-    empty_count = 0
 
     while True:
         try:
@@ -48,13 +47,14 @@ def get_multiline_input():
                 print_help()
                 return get_multiline_input()
 
-            # Empty line - check if we should stop
+            # Empty line - stop and analyze
             if not line.strip():
-                empty_count += 1
-                if empty_count >= 2:
+                # If we already have some lines, stop
+                if lines:
                     break
+                # Otherwise, ignore the empty line and continue
+                continue
             else:
-                empty_count = 0
                 lines.append(line)
 
         except EOFError:
