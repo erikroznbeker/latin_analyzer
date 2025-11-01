@@ -31,8 +31,10 @@ perennius – A (akuzativ) sg (jednina) n (srednji rod) aktiv od perennio (glago
 ### 1. Instaliraj Python dependencies
 
 ```bash
-pip install cltk
+pip install cltk[stanza]
 ```
+
+**Napomena:** Važno je instalirati `cltk[stanza]` (sa Stanza ekstenzijom) jer aplikacija koristi Stanza backend za morfološku analizu.
 
 ### 2. Preuzmi potrebne modele
 
@@ -69,8 +71,8 @@ Ova skripta će:
 Alternativno, možeš ručno instalirati:
 
 ```bash
-# Instalacija dependencies
-pip install cltk
+# Instalacija dependencies (sa Stanza ekstenzijom)
+pip install cltk[stanza]
 
 # Preuzimanje modela
 python setup_models.py
