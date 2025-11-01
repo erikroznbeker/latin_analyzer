@@ -135,7 +135,7 @@ class LatinAnalyzer:
 
     def format_morphology(self, word: Word) -> str:
         """
-        Format morphological features of a word.
+        Format morphological features of a word (CLTK 2.x).
 
         Args:
             word: CLTK Word object
@@ -146,19 +146,23 @@ class LatinAnalyzer:
         features = []
 
         # Skip punctuation
-        if word.upos == 'PUNCT':
+        if hasattr(word.upos, 'tag') and word.upos.tag == 'PUNCT':
             return ''
 
-        # Parse stanza_features string (format: "Key=Value|Key=Value")
-        if not word.stanza_features:
+        # Access features from CLTK 2.x UDFeatureTagSet
+        if not word.features:
             return ''
 
-        # Parse the features string
+        # Convert UDFeatureTagSet to dictionary
+        # word.features is iterable and returns ('features', [UDFeatureTag, ...])
         morph = {}
-        for feat in word.stanza_features.split('|'):
-            if '=' in feat:
-                key, value = feat.split('=', 1)
-                morph[key] = value
+        for feature_set in word.features:
+            if isinstance(feature_set, tuple):
+                _, tag_list = feature_set
+                for tag in tag_list:
+                    # Each tag has .key and .value attributes
+                    tag_dict = tag.model_dump()
+                    morph[tag_dict['key']] = tag_dict['value']
 
         # Case
         if 'Case' in morph:
@@ -173,7 +177,8 @@ class LatinAnalyzer:
             features.append(self.GENDER_MAP.get(morph['Gender'], morph['Gender']))
 
         # For verbs
-        if word.upos == 'VERB':
+        upos_tag = word.upos.tag if hasattr(word.upos, 'tag') else str(word.upos)
+        if upos_tag == 'VERB':
             # Person
             if 'Person' in morph:
                 features.append(self.PERSON_MAP.get(morph['Person'], morph['Person']))
@@ -207,8 +212,11 @@ class LatinAnalyzer:
         results = []
 
         for word in doc.words:
+            # Get UPOS tag (handle CLTK 2.x enum)
+            upos_tag = word.upos.tag if hasattr(word.upos, 'tag') else str(word.upos)
+
             # Skip punctuation
-            if word.upos == 'PUNCT':
+            if upos_tag == 'PUNCT':
                 continue
 
             # Get word form
@@ -221,7 +229,7 @@ class LatinAnalyzer:
             morph_desc = self.format_morphology(word)
 
             # Get POS description
-            pos_desc = self.POS_MAP.get(word.upos, word.upos)
+            pos_desc = self.POS_MAP.get(upos_tag, upos_tag)
 
             # Format: word – morphology od lemma = (translation would go here)
             if morph_desc:
